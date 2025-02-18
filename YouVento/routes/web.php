@@ -22,5 +22,11 @@ Route::get('/user',function(){
 });
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/users', [UserController::class, 'index']);
+
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
+Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [AuthController::class, 'register']);
