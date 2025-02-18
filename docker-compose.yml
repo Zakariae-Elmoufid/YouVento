@@ -1,0 +1,40 @@
+
+
+services:
+  postgres:
+    image: postgres
+    container_name: cont_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: youvento
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: cont_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: youvento@admin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+
+  php:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: container_laravel
+    restart: always
+    volumes:
+      - .:/var/www/html/
+    ports:
+      - "8000:80"
+    depends_on:
+      - postgres
+
+
