@@ -10,6 +10,12 @@
         @csrf
         <label for="name">Name</label>
         <input type="text" name="name" id="name" required>
+
+        <label for="role">Role</label>
+        <select  name="role" id="role" required>
+            <option value="1">Admin</option>
+            <option value="2">Student</option>
+        </select>
         
         <label for="email">Email</label>
         <input type="email" name="email" id="email" required>

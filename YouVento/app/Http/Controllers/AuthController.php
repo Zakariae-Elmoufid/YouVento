@@ -23,11 +23,13 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'role'   => 'required',
         ]);
 
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->role_id = $request->role;
         $user->password = Hash::make($request->password);
         $user->save();
 
@@ -46,8 +48,15 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('/users');
+            $user = Auth::user();
+            if ($user->role_id == 1) {
+                return redirect()->route('admin');
+            }else {
+                return redirect()->route('student');
+            }
+            // dd(Auth::user()->role_id);
         }
+
 
         return back()->withErrors(['email' => 'Invalid credentials']);
     }
