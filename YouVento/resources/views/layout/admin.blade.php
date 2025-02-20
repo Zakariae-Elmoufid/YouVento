@@ -16,7 +16,7 @@
                 <a href="#" class="block px-4 py-2 rounded-lg bg-gray-900 text-white">
                     Dashboard
                 </a>
-                <a href="#" class="block px-4 py-2 rounded-lg text-gray-400 hover:bg-gray-900 hover:text-white">
+                <a href="{{ route('club.index')}}" class="block px-4 py-2 rounded-lg text-gray-400 hover:bg-gray-900 hover:text-white">
                     Clubs
                 </a>
                 <a href="#" class="block px-4 py-2 rounded-lg text-gray-400 hover:bg-gray-900 hover:text-white">

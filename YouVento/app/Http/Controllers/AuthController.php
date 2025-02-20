@@ -54,11 +54,37 @@ class AuthController extends Controller
             }else {
                 return redirect()->route('student');
             }
-            // dd(Auth::user()->role_id);
         }
 
 
         return back()->withErrors(['email' => 'Invalid credentials']);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'category_id' => 'required|integer',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $club = Club::findOrFail($id);
+
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('logos', 'public');
+        } else {
+            $logoPath = $club->logo;
+        }
+
+        $club->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
+            'logo' => $logoPath,
+        ]);
+
+        return redirect()->route('clubs.index')->with('success', 'Club mis à jour avec succès !');
     }
 
 

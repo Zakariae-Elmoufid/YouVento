@@ -43,8 +43,11 @@ Route::get('student', function () {
     return view('student.index');
 })->name('student');
 
-Route::get('addClub',function(){
-    return view('admin.addClub');
-})->name('addclub');
+Route::get('createClub',function(){
+    return view('admin.club.create');
+})->name('club.create');
 
-Route::post('/creatClub',[ClubController::class,'store'])->name('club.store');
+Route::get('/clubs', [ClubController::class, 'index'])->name('club.index'); 
+Route::post('/stroreClub',[ClubController::class,'store'])->name('club.store');
+Route::get('/{id}/edit',[ClubController::class,'edit'])->name('club.edit');
+Route::post('/{id}/update', [ClubController::class, 'update'])->name('club.update');

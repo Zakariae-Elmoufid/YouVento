@@ -11,24 +11,27 @@
   <div class="max-w-2xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div class="bg-white rounded-lg shadow p-6">
             <div class="mb-6">
-                <h2 class="text-2xl font-bold text-gray-900">Ajouter un nouveau club</h2>
-                <p class="mt-1 text-sm text-gray-600">Créez un nouveau club en remplissant les informations ci-dessous.</p>
+                <h2 class="text-2xl font-bold text-gray-900">update club</h2>
             </div>
 
-            <form action="{{ route('club.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+            <form action="{{ route('club.update' , $club->id)}}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 <!-- Protection CSRF -->
                 @csrf
 
                 <!-- Nom du club -->
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700">Nom du club</label>
-                    <input type="text" name="name" id="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                    <input type="text" name="name" id="name" value="{{ $club->name }}"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" >
                 </div>
 
                 <!-- Description -->
                 <div>
                     <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                    <textarea name="description" id="description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required></textarea>
+                    <textarea name="description" id="description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                    {{ $club->description }}
+
+                    </textarea>
                 </div>
 
                 <!-- Catégorie -->
@@ -54,6 +57,9 @@
                                     <span>Télécharger un fichier</span>
                                     <input id="logo" name="logo" type="file" class="sr-only" >
                                 </label>
+                            </div>
+                            <div>
+                                <img src="{{ asset('storage/' . $club->logo) }}" id="logoPreview"  class="w-20 h-20 rounded-full border-blue-600 border-2"alt="">
                             </div>
                             <p class="text-xs text-gray-500">PNG, JPG jusqu'à 2MB</p>
                         </div>
@@ -82,8 +88,8 @@
             if (e.target.files && e.target.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    // Vous pouvez ajouter ici le code pour afficher la prévisualisation du logo
-                };
+                    document.getElementById('logoPreview').src = e.target.result;
+                    document.getElementById('logoPreview').style.display = 'block';                };
                 reader.readAsDataURL(e.target.files[0]);
             }
         });
