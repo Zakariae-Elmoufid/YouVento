@@ -15,9 +15,10 @@
             <!-- Logo -->
             <div class="flex">
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="/">
-                        <img class="h-8 w-auto" src="/images/logo.png" alt="YouCode">
-                    </a>
+                <a href="/" class="text-2xl font-bold flex items-center space-x-1 hover:text-indigo-600 transition-colors duration-200">
+                    <span>You</span>
+                    <span class="text-indigo-600">Vento</span>
+                </a>
                 </div>
 
                 <!-- Navigation desktop -->
@@ -79,7 +80,10 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <!-- Colonne 1 - À propos -->
             <div class="space-y-4">
-                <img class="h-8" src="/images/logo.png" alt="YouCode">
+            <a href="/" class="text-2xl font-bold flex items-center space-x-1 hover:text-indigo-600 transition-colors duration-200">
+                    <span>You</span>
+                    <span class="text-indigo-600">Vento</span>
+                </a>
                 <p class="text-gray-600">
                     Rejoignez la communauté YouCode et participez à des événements passionnants.
                 </p>

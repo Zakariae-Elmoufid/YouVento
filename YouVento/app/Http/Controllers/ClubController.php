@@ -10,7 +10,7 @@ class ClubController extends Controller
 
     public function index()
     {
-        $clubs = Club::all();
+        $clubs = Club::with('category')->get(); 
         return view('admin.club.index', compact('clubs'));
     }
 
@@ -72,4 +72,12 @@ class ClubController extends Controller
         return  redirect()->back()->with('success', 'Club mis à jour avec succès !');
     }
 
+    public function destroy($id)
+    {
+        $club = Club::findOrFail($id);
+        $club->delete();
+        return redirect()->back()->with('success', 'Club mis à jour avec succès !');
+    }
+
+   
 }

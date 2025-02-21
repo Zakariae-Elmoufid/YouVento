@@ -22,8 +22,8 @@
                 <a href="#" class="block px-4 py-2 rounded-lg text-gray-400 hover:bg-gray-900 hover:text-white">
                     Évènements
                 </a>
-                <a href="#" class="block px-4 py-2 rounded-lg text-gray-400 hover:bg-gray-900 hover:text-white">
-                    Utilisateurs
+                <a href="{{route('category.index')}}" class="block px-4 py-2 rounded-lg text-gray-400 hover:bg-gray-900 hover:text-white">
+                    categories
                 </a>
                 <a href="#" class="block px-4 py-2 rounded-lg text-gray-400 hover:bg-gray-900 hover:text-white">
                     Paramètres

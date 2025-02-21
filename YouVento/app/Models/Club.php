@@ -15,4 +15,10 @@ class Club extends Model
         'category_id',
         'logo',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class,'category_id');
+    }
+
 }

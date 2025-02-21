@@ -25,10 +25,13 @@ Route::get('/user',function(){
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClubController;
+use App\Http\Controllers\CategoryController;
 
 
 Route::get('/users', [UserController::class, 'index']);
-
+Route::get('/', function () {
+    return view('home');
+});
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
@@ -51,3 +54,6 @@ Route::get('/clubs', [ClubController::class, 'index'])->name('club.index');
 Route::post('/stroreClub',[ClubController::class,'store'])->name('club.store');
 Route::get('/{id}/edit',[ClubController::class,'edit'])->name('club.edit');
 Route::post('/{id}/update', [ClubController::class, 'update'])->name('club.update');
+Route::delete('/{id}/delete',[ClubController::class,'destroy'])->name('club.destroy');
+
+Route::resource('category',CategoryController::class);
