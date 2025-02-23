@@ -53,11 +53,6 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $category = Category::findOrFail($id);
-        return view('admin.category.show',compact('categorys'));
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -87,7 +82,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
 
     
-        $category::update([
+        $category->update([
             'title' => $request->title, 
         ]);
         return  redirect()->back()->with('success', 'Category  mis à jour avec succès !');

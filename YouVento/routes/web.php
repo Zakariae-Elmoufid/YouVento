@@ -37,14 +37,9 @@ Route::post('login', [AuthController::class, 'login']);
 Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [AuthController::class, 'register']);
 
-Route::get('dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin');
 
 
-Route::get('student', function () {
-    return view('student.index');
-})->name('student');
+;
 
 Route::get('createClub',function(){
     return view('admin.club.create');
@@ -56,4 +51,26 @@ Route::get('/{id}/edit',[ClubController::class,'edit'])->name('club.edit');
 Route::post('/{id}/update', [ClubController::class, 'update'])->name('club.update');
 Route::delete('/{id}/delete',[ClubController::class,'destroy'])->name('club.destroy');
 
-Route::resource('category',CategoryController::class);
+Route::resource('category',CategoryController::class)->except(['show']);
+
+use App\Http\Controllers\EventController;
+
+Route::prefix('events')->group(function () {
+    Route::get('/', [EventController::class, 'index'])->name('events.index');
+    Route::get('/create', [EventController::class, 'create'])->name('events.create');
+    Route::post('/', [EventController::class, 'store'])->name('events.store');
+    Route::get('/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
+    Route::put('/{event}', [EventController::class, 'update'])->name('events.update');
+    Route::delete('/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+    
+    Route::get('/calendar-events', [EventController::class, 'getEvents'])->name('events.calendar');
+});
+
+Route::get('/admin', function () {
+    return view('admin.dashboard');
+})->middleware('role:1');
+
+Route::get('/student', function () {
+    return view('student.dashboard');
+})->middleware('role:2');
+

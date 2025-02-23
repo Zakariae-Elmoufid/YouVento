@@ -23,6 +23,7 @@
             <thead class="bg-gray-100">
                 <tr>
                     <th class="px-6 py-3 text-left text-gray-700 font-semibold border-b">Nom</th>
+                    <th class="px-6 py-3 text-left text-gray-700 font-semibold border-b">Action</th>
                    
                     
                 </tr>
@@ -34,7 +35,11 @@
                         <td class="px-6 py-4 border-b">{{ $category->title}}</td>
                         <td class="px-6 py-4 border-b flex space-x-3">
 
-
+                        <a href="{{ route('category.edit', $category->id) }}" 
+                                class="px-3 py-1 bg-yellow-500 text-white text-sm font-semibold rounded-md 
+                                       hover:bg-yellow-600 transition duration-300">
+                                ✏️ Modifier
+                            </a>
                             <form action="{{ route('category.destroy', $category->id) }}" method="POST" 
                                   onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce category ?');">
                                 @csrf

@@ -50,9 +50,9 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             if ($user->role_id == 1) {
-                return redirect()->route('admin');
+                return redirect('/admin');
             }else {
-                return redirect()->route('student');
+                return redirect('/student');
             }
         }
 
